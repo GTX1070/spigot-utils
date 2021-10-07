@@ -44,7 +44,7 @@ public class CustomCommand extends Command {
     public void register() {
         try {
             String version = Bukkit.getServer().getClass().getPackage().getName();
-            Class<?> clazz = Class.forName("org.bukkit.craftbukkit." + Bukkit.getServer().getClass().getPackage().getName().substring(version.lastIndexOf('.') + 1) + ".CraftServer");
+            Class<?> clazz = Class.forName("org.bukkit.craftbukkit." + version.substring(version.lastIndexOf('.') + 1) + ".CraftServer");
             Object craftServer = clazz.cast(Bukkit.getServer());
             Object map = craftServer.getClass().getDeclaredMethod("getCommandMap").invoke(craftServer);
             map.getClass().getDeclaredMethod("register", String.class, Command.class).invoke(map, this.getName(), this);
